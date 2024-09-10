@@ -1,0 +1,33 @@
+function password(obj) {
+    // Validate if all required properties are present
+    if (
+        typeof obj !== 'object' ||
+        !obj.hasOwnProperty('name') ||
+        !obj.hasOwnProperty('birthYear') ||
+        !obj.hasOwnProperty('siteName')
+    ) {
+        return "invalid";
+    }
+
+    // Validate if birthYear is a 4-digit number
+    if (typeof obj.birthYear !== 'number' || obj.birthYear.toString().length !== 4) {
+        return "invalid";
+    }
+
+    // Extract the properties
+    const name = obj.name;
+    const birthYear = obj.birthYear;
+    const siteName = obj.siteName;
+
+    // Create the password structure
+    const password = `${siteName.charAt(0).toUpperCase() + siteName.slice(1)}#${name}@${birthYear}`;
+
+    // Return the generated password
+    return password;
+}
+
+// Test cases
+console.log(password({ name: "kolimuddin", birthYear: 1999, siteName: "google" })); // Output: Google#kolimuddin@1999
+console.log(password({ name: "rahat", birthYear: 2002, siteName: "Facebook" }));    // Output: Facebook#rahat@2002
+console.log(password({ name: "toky", birthYear: 200, siteName: "Facebook" }));      // Output: invalid
+console.log(password({ name: "maisha", birthYear: 2002 }));                         // Output: invalid
